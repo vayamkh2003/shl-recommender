@@ -93,6 +93,7 @@ def _load_raw_catalog() -> list[dict]:
     # Fix literal \r\n splits inside JSON string values
     cleaned = re.sub(r"\r\n(?!\s*[{}\[\],\"\\\\])", " ", raw)
     cleaned = cleaned.replace("\r\n", "\n").replace("\r", "")
+    cleaned = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", cleaned)
     return json.loads(cleaned)
 
 
