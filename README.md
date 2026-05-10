@@ -27,7 +27,7 @@ User ──► POST /chat ──► FastAPI (main.py)
 | Decision | Rationale |
 |---|---|
 | **FAISS in-memory** | Zero infra cost; 377 assessments fit trivially (< 5 MB). Rebuilt on cold start (< 10 s). |
-| **Gemini 1.5 Flash** | Fast, free-tier available, large context window for catalog injection. |
+| **Gemini 2.5 Flash** | Fast, free-tier available, large context window for catalog injection. |
 | **all-MiniLM-L6-v2** | 80 MB, CPU-friendly, good semantic quality for short texts. |
 | **Retrieval-augmented generation** | Top-60 catalog items injected per request so Gemini stays grounded and cannot hallucinate URLs. |
 | **Stateless API** | Full conversation history sent on every call — no server-side session storage needed. |
@@ -89,12 +89,6 @@ curl -X POST http://localhost:8000/chat \
 ---
 
 ## Deploy to Render (free tier)
-
-1. Push this repo to GitHub.
-2. Go to [render.com](https://render.com) → **New Web Service** → connect your repo.
-3. Render auto-detects `render.yaml`. Set the `GEMINI_API_KEY` environment variable
-   in the Render dashboard under **Environment**.
-4. Deploy. First `/health` call may take up to 2 minutes (cold start — model download).
 
 > **Cold start note**: `all-MiniLM-L6-v2` (~80 MB) is downloaded from HuggingFace on
 > first boot. Render's free tier spins down after inactivity; the evaluator's 2-minute
