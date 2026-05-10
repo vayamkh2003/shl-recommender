@@ -11,7 +11,7 @@ hiring managers find the right assessments through natural dialogue.
 User ──► POST /chat ──► FastAPI (main.py)
                             │
                             ▼
-                    agent.py (Gemini 1.5 Flash)
+                    agent.py (Gemini 2.5 Flash)
                             │
               ┌─────────────┴──────────────┐
               │                            │
