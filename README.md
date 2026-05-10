@@ -53,19 +53,8 @@ shl-recommender/
 ---
 
 ## Local setup
-
-```bash
-# 1. Clone & create virtualenv
-python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Set env vars
-cp .env.example .env
-# Edit .env and set GEMINI_API_KEY=your_key_here
-
-# 4. Run
+```
+#  Run
 uvicorn main:app --reload --port 8000
 ```
 
