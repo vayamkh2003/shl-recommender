@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: shl-recommender
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: EMBED_MODEL
+        value: all-MiniLM-L6-v2
+      - key: CATALOG_PATH
+        value: data/product.json
+      - key: MAX_CATALOG_IN_PROMPT
+        value: "60"
+    disk:
+      name: model-cache
+      mountPath: /root/.cache
+      sizeGB: 1
